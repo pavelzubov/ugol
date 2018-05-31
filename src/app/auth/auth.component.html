@@ -1,21 +1,17 @@
 <div class="container">
   <div class="auth-block">
-      <!--<button mat-raised-button (click)="authService.logIn('test','test')">Сделать токен</button>-->
       <div class="user">
         <mat-form-field>
-          <input matInput placeholder="Имя" #user='ngModel' [(ngModel)]="user" required>
+          <input matInput placeholder="Имя" #userInput='ngModel' [(ngModel)]="user" required>
         </mat-form-field>
       </div>
       <div class="password">
         <mat-form-field>
-          <input matInput type="password" placeholder="Пароль" #password='ngModel' [(ngModel)]="password" required>
+          <input matInput type="password" placeholder="Пароль" #passwordInput='ngModel' [(ngModel)]="password" required>
         </mat-form-field>
       </div>
       <div class="button">
-        <button [disabled]="(password.invalid && password.touched) || (user.invalid && user.touched)" (click)="logIn()" mat-raised-button color="primary">Войти</button>
+        <button [disabled]="!passwordInput.valid  || !userInput.valid" (click)="logIn()" mat-raised-button color="primary">Войти</button>
       </div>
-  </div>
-  <div class="token">
-
   </div>
 </div>
