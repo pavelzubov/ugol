@@ -3,24 +3,28 @@ import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
 import {CalculateComponent} from './calculate/calculate.component';
-import {RouterModule, Routes} from "@angular/router";
-import {AuthGuard} from "./auth.guard";
+import {RouterModule, Routes} from '@angular/router';
+import {AuthGuard} from './auth.guard';
+import { AuthComponent } from './auth/auth.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
-  {path: '', component: AppComponent},
+  {path: '', component: AuthComponent},
   {path: 'calculate', component: CalculateComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    CalculateComponent
+    CalculateComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {

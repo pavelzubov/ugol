@@ -4,8 +4,8 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  user: string = 'test';
-  password: string = 'test';
+  user = 'test';
+  password = 'test';
 
   constructor() {
   }
