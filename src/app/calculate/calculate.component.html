@@ -1,1 +1,57 @@
-<div class="out"><button (click)="logOut()" mat-raised-button color="warn">Выйти</button></div>
+<div class="container">
+  <div class="button-block">
+    <button (click)="logOut()" mat-raised-button color="warn">Выйти</button>
+  </div>
+  <div class="card">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <h1 class="mat-headline">Расчет</h1>
+        <mat-card-subtitle></mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="calculate">
+          <form [formGroup]="calculateForm">
+            <div class="input-block">
+              <div class="input">
+                <mat-form-field>
+                  <input matInput type="number" placeholder="Количество метров" formControlName="count"
+                         [(ngModel)]="count">
+                </mat-form-field>
+              </div>
+              <div class="button">
+                <button [disabled]="calculateForm.invalid" mat-raised-button
+                        color="primary">Расчитать
+                </button>
+              </div>
+            </div>
+            <div class="result-table">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Фирма</th>
+                  <th>Сумма</th>
+                  <th>Тюбиков</th>
+                  <th>Банок</th>
+                  <th>Бочек</th>
+                  <th>Цистерн</th>
+                </thead>
+                <tbody>
+                <tr *ngFor="let line of result">
+                  <td>{{line.name}}</td>
+                  <td>{{line.price}}</td>
+                  <td>{{line.tube}}</td>
+                  <td>{{line.bank}}</td>
+                  <td>{{line.tank}}</td>
+                  <td>{{line.barrel}}</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </form>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>

@@ -1,8 +1,11 @@
 .auth-block
+  width: 100%
   display: flex
   flex-direction: column
   justify-content: center
-  align-items: flex-end
+  align-items: flex-start
+  > div, .mat-form-field
+    width: 100%
 
 .container
   width: 100%
@@ -12,5 +15,13 @@
   justify-content: center
   align-items: center
   align-content: center
-  &, > div
-    padding: 1rem
+
+.wrong
+  color: red
+  visibility: hidden
+
+.title
+  font-size: 1.5rem
+
+.visible
+  visibility: visible

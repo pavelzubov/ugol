@@ -5,11 +5,20 @@ import {AppComponent} from './app.component';
 import {CalculateComponent} from './calculate/calculate.component';
 import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
-import { AuthComponent } from './auth/auth.component';
+import {AuthComponent} from './auth/auth.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatInputModule} from '@angular/material';
-import {FormsModule} from '@angular/forms';
-import { MainComponent } from './main/main.component';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatError,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSortModule,
+  MatTableModule
+} from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MainComponent} from './main/main.component';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   {path: '', component: MainComponent},
@@ -26,13 +35,18 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
     MatButtonModule,
+    MatFormFieldModule,
     MatInputModule,
+    MatCardModule,
+    MatSortModule,
     FormsModule,
     BrowserAnimationsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, HttpClient ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
