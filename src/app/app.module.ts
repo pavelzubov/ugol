@@ -9,9 +9,11 @@ import { AuthComponent } from './auth/auth.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatInputModule} from '@angular/material';
 import {FormsModule} from '@angular/forms';
+import { MainComponent } from './main/main.component';
 
 const appRoutes: Routes = [
-  {path: '', component: AuthComponent},
+  {path: '', component: MainComponent},
+  {path: 'auth', component: AuthComponent},
   {path: 'calculate', component: CalculateComponent, canActivate: [AuthGuard]}
 ];
 
@@ -19,7 +21,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     CalculateComponent,
-    AuthComponent
+    AuthComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

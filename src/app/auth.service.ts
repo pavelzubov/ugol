@@ -29,4 +29,8 @@ export class AuthService {
   public getToken(user: string, password: string): string {
     return user === this.user && password === this.password ? user + password : null;
   }
+
+  public getLocalToken(): string {
+    return localStorage.getItem('access_token');
+  }
 }
