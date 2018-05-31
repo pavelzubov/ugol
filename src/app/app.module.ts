@@ -7,6 +7,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth.guard';
 import { AuthComponent } from './auth/auth.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatInputModule} from '@angular/material';
+import {FormsModule} from '@angular/forms';
 
 const appRoutes: Routes = [
   {path: '', component: AuthComponent},
@@ -21,6 +23,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    MatButtonModule,
+    MatInputModule,
+    FormsModule,
     BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes)
   ],

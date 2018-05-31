@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {NgModel} from '@angular/forms';
 
 @Component({
   selector: 'app-auth',
@@ -8,6 +9,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./auth.component.sass']
 })
 export class AuthComponent implements OnInit {
+  user: string;
+  password: string;
+
   constructor(public authService: AuthService, public router: Router) {
 
   }
@@ -17,8 +21,9 @@ export class AuthComponent implements OnInit {
   }
 
   logIn() {
-    this.authService.logIn('test', 'test');
-    this.router.navigate(['/calculate']);
+    this.authService.logIn(this.user, this.password)
+      .then(res => this.router.navigate([res]))
+      .catch(res => console.error(res));
   }
 
 }

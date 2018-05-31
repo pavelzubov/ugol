@@ -1,7 +1,19 @@
 <div class="container">
   <div class="auth-block">
-    <button (click)="authService.logIn('test','test')">Сделать токен</button>
-    <button routerLink="/calculate">Войти</button>
+      <!--<button mat-raised-button (click)="authService.logIn('test','test')">Сделать токен</button>-->
+      <div class="user">
+        <mat-form-field>
+          <input matInput placeholder="Имя" #user='ngModel' [(ngModel)]="user" required>
+        </mat-form-field>
+      </div>
+      <div class="password">
+        <mat-form-field>
+          <input matInput type="password" placeholder="Пароль" #password='ngModel' [(ngModel)]="password" required>
+        </mat-form-field>
+      </div>
+      <div class="button">
+        <button [disabled]="(password.invalid && password.touched) || (user.invalid && user.touched)" (click)="logIn()" mat-raised-button color="primary">Войти</button>
+      </div>
   </div>
   <div class="token">
 

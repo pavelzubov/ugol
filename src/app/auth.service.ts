@@ -6,12 +6,20 @@ import {Injectable} from '@angular/core';
 export class AuthService {
   user = 'test';
   password = 'test';
+  page = '/calculate';
 
   constructor() {
   }
 
-  public logIn(user: string, password: string) {
-    localStorage.setItem('access_token', this.getToken(user, password));
+  public logIn(user: string, password: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const token = this.getToken(user, password);
+      if (!token) {
+        reject('Error: invalid username or password');
+      }
+      localStorage.setItem('access_token', token);
+      resolve(this.page);
+    });
   }
 
   public logOut() {
@@ -19,8 +27,6 @@ export class AuthService {
   }
 
   public getToken(user: string, password: string): string {
-    if (user === this.user && password === this.password) {
-      return user + password;
-    }
+    return user === this.user && password === this.password ? user + password : null;
   }
 }
