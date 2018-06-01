@@ -14,13 +14,13 @@
           <div class="user">
             <mat-form-field>
               <input matInput type="text" placeholder="Имя" formControlName="user" [(ngModel)]="user"
-                     (keyup)="wrong=false">
+                     (focus)="wrong=false">
             </mat-form-field>
           </div>
           <div class="password">
             <mat-form-field>
               <input matInput type="password" placeholder="Пароль" formControlName="password" [(ngModel)]="password"
-                     (keyup)="wrong=false">
+                     (focus)="wrong=false">
             </mat-form-field>
           </div>
         </div>
