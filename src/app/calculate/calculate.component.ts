@@ -11,9 +11,10 @@ import {BaseService} from '../base.service';
   styleUrls: ['./calculate.component.sass']
 })
 export class CalculateComponent implements OnInit {
-  public result: any[] = [];
   private data: Response;
+  public result: any[] = [];
   public count: number;
+  public wrongPrice = false;
   public materials: any[] = [];
   public calculateForm: FormGroup = new FormGroup({
     'count': new FormControl('', Validators.required)
@@ -25,6 +26,16 @@ export class CalculateComponent implements OnInit {
   ngOnInit() {
     this.base.getData().subscribe(res => {
       this.data = res;
+      // Смотрим ошибки в ценах
+      for (const material of Object.values(res.prices)) {
+        for (const firm of Object.values(material)) {
+          if (firm != +firm) {
+            console.error('Прайс составлен неверно');
+            this.wrongPrice = true;
+            return;
+          }
+        }
+      }
       this.materials = Object.keys(res.materials);
       console.log(this.data);
     });
@@ -40,7 +51,7 @@ export class CalculateComponent implements OnInit {
     //
     // Составляем "таблицу" коэффициентов соотношения цены за литр для каждой тары для каждой фирмы.
     // После просто проходим по этим коэффициентам от самого маленького для каждой фирмы.
-    // Это позволит учесть случай, когда дешевле купить кучу банок, чем одну бочку (хотя в жизни и наоборот чаще всего).
+    // Это позволит учесть случай, когда дешевле купить кучу банок, чем одну бочку (хотя в жизни и наоборот, чаще всего).
 
     // Количество необходимых литров
     const liters = this.count * this.data.expenditure,

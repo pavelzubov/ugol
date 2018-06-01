@@ -6,7 +6,6 @@
     <mat-card class="">
       <mat-card-header>
         <h1 class="mat-headline">Расчет</h1>
-        <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <div class="calculate">
@@ -19,7 +18,7 @@
                 </mat-form-field>
               </div>
               <div class="button">
-                <button [disabled]="calculateForm.invalid" mat-raised-button
+                <button [disabled]="calculateForm.invalid || wrongPrice" mat-raised-button
                         color="primary" (click)="calculate()">Расчитать
                 </button>
               </div>
@@ -31,10 +30,6 @@
                   <th>Фирма</th>
                   <th>Сумма <span class="caption">(руб.)</span></th>
                   <th *ngFor="let material of materials">{{material}} <span class="caption">(шт.)</span></th>
-                  <!--<th>Тюбиков <span class="caption">(шт.)</span></th>
-                  <th>Банок <span class="caption">(шт.)</span></th>
-                  <th>Бочек <span class="caption">(шт.)</span></th>
-                  <th>Цистерн <span class="caption">(шт.)</span></th>-->
                   <th>Остаток <span class="caption">(л.)</span></th>
                 </tr>
                 </thead>
@@ -46,10 +41,6 @@
                     {{line[material]}}
                     <span class="caption" *ngIf="line[material]===undefined">Нет в наличии</span>
                   </td>
-                  <!--<td>{{line.tube}} <span class="caption" *ngIf="line.tube===undefined">Нет в наличии</span></td>
-                  <td>{{line.bank}} <span class="caption" *ngIf="line.bank===undefined">Нет в наличии</span></td>
-                  <td>{{line.tank}} <span class="caption" *ngIf="line.tank===undefined">Нет в наличии</span></td>
-                  <td>{{line.barrel}} <span class="caption" *ngIf="line.barrel===undefined">Нет в наличии</span></td>-->
                   <td>{{line.remainder}} <span class="caption" *ngIf="line.remainder===undefined"> Без остатка</span>
                   </td>
                 </tr>
@@ -59,8 +50,6 @@
           </form>
         </div>
       </mat-card-content>
-      <mat-card-actions>
-      </mat-card-actions>
     </mat-card>
   </div>
 </div>
