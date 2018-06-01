@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
-import {Result, Response} from '../types.factory';
+import {Response} from '../types.factory';
 import {BaseService} from '../base.service';
 
 @Component({
@@ -89,7 +89,7 @@ export class CalculateComponent implements OnInit {
 
       // Составляем "таблицу" коэффициентов и сортируем её по возрастанию,
       // чтобы начинать с самого маленького коэффициента
-      for (const item of materials) {
+      for (const item of Object.entries(this.data.materials)) {
         if (firm in this.data.prices[item[0]]) {
           factors[firm].push([item[0], this.data.prices[item[0]][firm] / item[1]]);
         }
