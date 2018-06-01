@@ -3,7 +3,7 @@
     <button (click)="logOut()" mat-raised-button color="warn">Выйти</button>
   </div>
   <div class="card">
-    <mat-card class="example-card">
+    <mat-card class="">
       <mat-card-header>
         <h1 class="mat-headline">Расчет</h1>
         <mat-card-subtitle></mat-card-subtitle>
@@ -14,35 +14,44 @@
             <div class="input-block">
               <div class="input">
                 <mat-form-field>
-                  <input matInput type="number" placeholder="Количество метров" formControlName="count"
+                  <input matInput type="number" placeholder="Количество квадратных метров" formControlName="count"
                          [(ngModel)]="count">
                 </mat-form-field>
               </div>
               <div class="button">
                 <button [disabled]="calculateForm.invalid" mat-raised-button
-                        color="primary">Расчитать
+                        color="primary" (click)="calculate()">Расчитать
                 </button>
               </div>
             </div>
-            <div class="result-table">
+            <div class="result-table" *ngIf="result.length">
               <table class="table">
                 <thead>
                 <tr>
                   <th>Фирма</th>
-                  <th>Сумма</th>
-                  <th>Тюбиков</th>
-                  <th>Банок</th>
-                  <th>Бочек</th>
-                  <th>Цистерн</th>
+                  <th>Сумма <span class="caption">(руб.)</span></th>
+                  <th *ngFor="let material of materials">{{material}} <span class="caption">(шт.)</span></th>
+                  <!--<th>Тюбиков <span class="caption">(шт.)</span></th>
+                  <th>Банок <span class="caption">(шт.)</span></th>
+                  <th>Бочек <span class="caption">(шт.)</span></th>
+                  <th>Цистерн <span class="caption">(шт.)</span></th>-->
+                  <th>Остаток <span class="caption">(л.)</span></th>
+                </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let line of result">
                   <td>{{line.name}}</td>
                   <td>{{line.price}}</td>
-                  <td>{{line.tube}}</td>
-                  <td>{{line.bank}}</td>
-                  <td>{{line.tank}}</td>
-                  <td>{{line.barrel}}</td>
+                  <td *ngFor="let material of materials">
+                    {{line[material]}}
+                    <span class="caption" *ngIf="line[material]===undefined">Нет в наличии</span>
+                  </td>
+                  <!--<td>{{line.tube}} <span class="caption" *ngIf="line.tube===undefined">Нет в наличии</span></td>
+                  <td>{{line.bank}} <span class="caption" *ngIf="line.bank===undefined">Нет в наличии</span></td>
+                  <td>{{line.tank}} <span class="caption" *ngIf="line.tank===undefined">Нет в наличии</span></td>
+                  <td>{{line.barrel}} <span class="caption" *ngIf="line.barrel===undefined">Нет в наличии</span></td>-->
+                  <td>{{line.remainder}} <span class="caption" *ngIf="line.remainder===undefined"> Без остатка</span>
+                  </td>
                 </tr>
                 </tbody>
               </table>
