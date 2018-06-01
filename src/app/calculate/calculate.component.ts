@@ -62,13 +62,16 @@ export class CalculateComponent implements OnInit {
       // (Хотя можно учесть и возможность того, что одна цистерна будет дешевле нескольких бочек
       // даже учитывая переплату за ненужный остаток.
       // Но я не стал учитывать её)) Просто обозначу, что я в курсе о ней)
-      materials = Object.keys(this.data.materials)
-        .map(item => [item, this.data.materials[item]])
-        .filter(item => liters / item[1] > 1)
+      materials = Object.entries(this.data.materials)
+        .filter(item => liters / item[1] >= 1)
         .sort((a, b) => a[1] - b[1]),
       firms = {},
       factors = {},
       result = {};
+    // Если все тары больше необходимых литров, то добавляем самую маленькую
+    if (!materials.length) {
+      materials.push(Object.entries(this.data.materials)[0]);
+    }
     // Составляем список фирм (возможно фирма продает только бочки, потому надо пройтись по всем тарам)
     for (const price of Object.keys(this.data.prices)) {
       for (const firm of Object.keys(this.data.prices[price])) {
@@ -92,7 +95,7 @@ export class CalculateComponent implements OnInit {
         }
       }
       factors[firm].sort((a, b) => a[1] > b[1]);
-
+      console.log(factors);
       // Для каждой тары записываем сколько вместится целых штук
       // Тут же отнимаем от количества литров и прибавляем цену к итогу для фирмы
       for (const factor of factors[firm]) {
@@ -126,10 +129,13 @@ export class CalculateComponent implements OnInit {
       result[firm].remainder = Math.abs(calcLiters).toFixed(1);
     }
     // В конце сортируем получанные данные по итоговой цене для каждой фирмы
-    this.result = Object.values(result).map(item => {
-      item['price'] = item['price'].toFixed(2);
-      return item;
-    }).sort((a, b) => a['price'] - b['price']);
+    this.result = Object.values(result)
+      .map(item => {
+        item['price'] = item['price'].toFixed(2);
+        return item;
+      })
+      .filter(item => item['price'] > 0)
+      .sort((a, b) => a['price'] - b['price']);
     console.log(this.result);
   }
 }
