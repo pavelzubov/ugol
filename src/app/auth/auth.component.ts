@@ -10,9 +10,9 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
   styleUrls: ['./auth.component.sass']
 })
 export class AuthComponent implements OnInit {
-  user: string;
-  password: string;
-  wrong = false;
+  public user: string;
+  public password: string;
+  public wrong = false;
   public authForm: FormGroup = new FormGroup({
     'user': new FormControl('', Validators.required),
     'password': new FormControl('', Validators.required),
@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
   ngOnInit() {
   }
 
-  logIn() {
+  public logIn() {
     this.authService.logIn(this.user, this.password)
       .then(res => this.router.navigate([res]))
       .catch(res => {
@@ -32,5 +32,4 @@ export class AuthComponent implements OnInit {
         console.error(res);
       });
   }
-
 }

@@ -4,9 +4,9 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  user = 'test';
-  password = 'test';
-  page = '/calculate';
+  private user = 'test';
+  private password = 'test';
+  private page = '/calculate';
 
   constructor() {
   }
@@ -27,6 +27,8 @@ export class AuthService {
   }
 
   public getToken(user: string, password: string): string {
+    // Я просто сверяю лог/пасс с test/test.
+    // На этом месте должно быть подключение к бэку и ответ подходит ли лог/пасс
     return user === this.user && password === this.password ? user + password : null;
   }
 

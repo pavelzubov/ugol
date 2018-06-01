@@ -1,6 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from './auth.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +6,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent implements OnInit {
-  constructor(public authService: AuthService, public router: Router) {
-
+  constructor() {
   }
 
   ngOnInit() {
-
   }
 }

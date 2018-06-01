@@ -1,15 +1,10 @@
-<!--<div class="container">
-  <div class="title-block">
-    <div class="title"></div>
-  </div>
-
-</div>-->
-
 <div class="container">
   <form [formGroup]="authForm">
     <mat-card class="auth-card">
       <mat-card-header>
-        <mat-card-title class="title"><h1 class="mat-headline">Введите логин и пароль</h1> </mat-card-title>
+        <mat-card-title class="title">
+          <h1 class="mat-title">Введите логин и пароль</h1>
+        </mat-card-title>
         <mat-card-subtitle class="wrong caption" [ngClass]="{visible:wrong}">
           Имя или пароль введены неверно
         </mat-card-subtitle>
