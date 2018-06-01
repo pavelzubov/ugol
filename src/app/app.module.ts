@@ -10,11 +10,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatCardModule,
-  MatError,
   MatFormFieldModule,
   MatInputModule,
-  MatSortModule,
-  MatTableModule
+  MatSortModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MainComponent} from './main/main.component';
