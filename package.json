@@ -8,7 +8,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "heroku-prebuild": "rm -rf node_modules && npm cache clean",
     "postinstall": "ng build --aot --prod",
     "postbuild": "ng build --prod"
   },
