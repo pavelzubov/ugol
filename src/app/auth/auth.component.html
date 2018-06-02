@@ -13,13 +13,13 @@
         <div class="auth-block">
           <div class="user">
             <mat-form-field>
-              <input matInput type="text" placeholder="Имя" formControlName="user" [(ngModel)]="user"
+              <input matInput type="text" placeholder="Имя" [formControl]="authForm.controls['user']"
                      (focus)="wrong=false">
             </mat-form-field>
           </div>
           <div class="password">
             <mat-form-field>
-              <input matInput type="password" placeholder="Пароль" formControlName="password" [(ngModel)]="password"
+              <input matInput type="password" placeholder="Пароль" [formControl]="authForm.controls['password']"
                      (focus)="wrong=false">
             </mat-form-field>
           </div>

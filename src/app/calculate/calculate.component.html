@@ -13,8 +13,7 @@
             <div class="input-block">
               <div class="input">
                 <mat-form-field>
-                  <input matInput type="number" placeholder="Количество кв. метров" formControlName="count"
-                         [(ngModel)]="count">
+                  <input matInput type="number" placeholder="Количество кв. метров" [formControl]="calculateForm.controls['count']">
                 </mat-form-field>
               </div>
               <div class="button">

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
-import {NgModel} from '@angular/forms';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 
 @Component({
@@ -10,8 +9,6 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
   styleUrls: ['./auth.component.sass']
 })
 export class AuthComponent implements OnInit {
-  public user: string;
-  public password: string;
   public wrong = false;
   public authForm: FormGroup = new FormGroup({
     'user': new FormControl('', Validators.required),
@@ -25,7 +22,7 @@ export class AuthComponent implements OnInit {
   }
 
   public logIn() {
-    this.authService.logIn(this.user, this.password)
+    this.authService.logIn(this.authForm.controls['user'].value, this.authForm.controls['password'].value)
       .then(res => this.router.navigate([res]))
       .catch(res => {
         this.wrong = true;
