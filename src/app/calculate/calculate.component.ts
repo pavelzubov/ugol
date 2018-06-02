@@ -13,7 +13,6 @@ import {BaseService} from '../base.service';
 export class CalculateComponent implements OnInit {
   private data: Response;
   public result: any[] = [];
-  public count: number;
   public wrongPrice = false;
   public materials: any[] = [];
   public calculateForm: FormGroup = new FormGroup({
@@ -37,7 +36,6 @@ export class CalculateComponent implements OnInit {
         }
       }
       this.materials = Object.keys(res.materials);
-      console.log(this.data);
     });
   }
 
@@ -54,7 +52,7 @@ export class CalculateComponent implements OnInit {
     // Это позволит учесть случай, когда дешевле купить кучу банок, чем одну бочку (хотя в жизни и наоборот, чаще всего).
 
     // Количество необходимых литров
-    const liters = this.count * this.data.expenditure,
+    const liters = this.calculateForm.controls['count'].value * this.data.expenditure,
       // Делаем массив материалов
       // Сортируем его по возрастанию и отбрасываем объемы, которые не подойдут к литрам
       // (ну то есть нет смысла покупать цистерну на 80, если тебе нужно 70 литров),
@@ -95,7 +93,6 @@ export class CalculateComponent implements OnInit {
         }
       }
       factors[firm].sort((a, b) => a[1] > b[1]);
-      console.log(factors);
       // Для каждой тары записываем сколько вместится целых штук
       // Тут же отнимаем от количества литров и прибавляем цену к итогу для фирмы
       for (const factor of factors[firm]) {
@@ -136,6 +133,5 @@ export class CalculateComponent implements OnInit {
       })
       .filter(item => item['price'] > 0)
       .sort((a, b) => a['price'] - b['price']);
-    console.log(this.result);
   }
 }
