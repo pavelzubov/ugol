@@ -1,4 +1,7 @@
 import {Injectable} from '@angular/core';
+import {Observable, throwError} from 'rxjs';
+import {fromPromise} from 'rxjs/internal/observable/fromPromise';
+import {map, catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +14,15 @@ export class AuthService {
   constructor() {
   }
 
-  public logIn(user: string, password: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+  public logIn(user: string, password: string): Observable<any> {
+    return fromPromise(new Promise((resolve, reject) => {
       const token = this.getToken(user, password);
       if (!token) {
         reject('Error: invalid username or password');
       }
       localStorage.setItem('access_token', token);
       resolve(this.page);
-    });
+    }));
   }
 
   public logOut() {
